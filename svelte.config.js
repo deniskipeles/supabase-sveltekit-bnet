@@ -36,7 +36,7 @@ const config = {
 	],
 
 	kit: {
-		adapter: adapter({ edge: true })
+		adapter: adapter({ edge: false })
 	}
 };
 
