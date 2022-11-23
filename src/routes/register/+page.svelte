@@ -7,15 +7,22 @@ let email = '';
 let password = '';
 
     const signUp = async () => {
-    let { data: user, error } = await supabase.auth.signUp({
-        email,
-        password
-    })
-    if(user){
-        goto("/login",{replaceState:true})
+        let { data: user, error } = await supabase.auth.signUp({
+            email,
+            password
+        })
+        if(user){
+            goto("/login",{replaceState:true})
+        }
+        console.log(user)
+        console.log("error",error)
     }
-    console.log(user)
-    console.log("error",error)
+    const signUpWithGoogle = async () => {
+        let { data,error } = await supabase.auth.signInWithOAuth({
+            provider:"google"
+        })
+        console.log(data)
+        console.log("error",error)
     }
 </script>
     
@@ -45,7 +52,7 @@ let password = '';
             <a href="#" class="twitter btn">
                 <i class="fa fa-twitter fa-fw"></i> Sign up with Twitter
             </a>
-            <a href="#" class="google btn"><i class="fa fa-google fa-fw">
+            <a href="#" on:click={signUpWithGoogle} class="google btn"><i class="fa fa-google fa-fw">
                 </i> Sign up with Google+
             </a>
             </div>
